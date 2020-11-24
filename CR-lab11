@@ -7,7 +7,7 @@ sudo apt install gcc-arm-linux-gnueabi
 
 2)
 dpkg -L gcc-arm-linux-gnueabi
-
+L'exécutable est dans: /usr/bin/ et son nom est:arm-linux-gnueabi
 3)
 Il faut ouvrir le .bashrc et y ajouter 2 export pour chacunes des variables
 export ARCH=arm
