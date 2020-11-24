@@ -1,0 +1,82 @@
+CR LAB 11
+_______________________________________________________________________________
+
+1)
+
+sudo apt install gcc-arm-linux-gnueabi
+
+2)
+dpkg -L gcc-arm-linux-gnueabi
+
+3)
+Il faut ouvrir le .bashrc et y ajouter 2 export pour chacunes des variables
+export ARCH=arm
+export CROSS_COMPILE=arm-linux-gnueabi-
+
+Après avoir démarré un nouveau terminal:
+echo $ARCH affiche arm
+echo $CROSS_COMPILE affiche arm-linux-gnueabi
+
+4)
+cd Desktop | echo $ARCH
+cd Desktop | echo $CROSS_COMPILE	
+
+affiche bien les variables
+
+5)
+modification du make file:
+
+CC=${CROSS_COMPILE}gcc
+OBJ=max.o min.o variance.o
+
+ifeq (${DEBUG},yes)
+        CC_OPTIONS=-g -Wall
+        MODE= Mode Debug
+else
+        CC_OPTIONS=
+        MODE= Mode Release
+endif
+
+mode : test.exe
+        @echo "$(MODE)"
+
+max.o : max.c
+        ${CC} ${CC_OPTIONS} -c $^
+min.o : min.c
+        ${CC} ${CC_OPTIONS} -c $^
+
+variance.o : variance.c
+        ${CC} ${CC_OPTIONS} -c $^
+
+test.o : test.c
+        ${CC} ${CC_OPTIONS} -c $^
+
+test.exe : test.o ${OBJ}
+        ${CC} ${CC_OPTIONS} -o $@ $< ${OBJ}
+
+clean: *.o
+        @rm *.o
+        
+install : test.exe
+        mv $< $(HOME)
+
+6)
+make clean
+make
+
+affiche:
+
+arm-linux-gnueabi-gcc  -c test.c
+arm-linux-gnueabi-gcc  -c max.c
+arm-linux-gnueabi-gcc  -c min.c
+arm-linux-gnueabi-gcc  -c variance.c
+arm-linux-gnueabi-gcc  -o test.exe test.o max.o min.o variance.o
+Mode Release
+
+C'est bien le cross compiler qui est appelé.
+
+7)
+Il y a une erreur:
+bash: ./test.exe: cannot execute binary file: Exec format error
+
+Explication:
