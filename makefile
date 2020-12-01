@@ -1,4 +1,4 @@
-CC=${CROSS_COMPILE}gcc
+CC=gcc
 OBJ=max.o min.o variance.o
 
 ifeq (${DEBUG},yes)
@@ -13,18 +13,18 @@ mode : test.exe
 	@echo "$(MODE)"
 
 max.o : max.c
-	${CC} ${CC_OPTIONS} -c $^
+	${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 min.o : min.c
-	${CC} ${CC_OPTIONS} -c $^
+	${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 variance.o : variance.c
-	${CC} ${CC_OPTIONS} -c $^
+	${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 test.o : test.c
-	${CC} ${CC_OPTIONS} -c $^
+	${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 test.exe : test.o ${OBJ}
-	${CC} ${CC_OPTIONS} -o $@ $< ${OBJ}
+	${CROSS_COMPILE}${CC} ${CC_OPTIONS} -o $@ $< ${OBJ}
 
 clean: *.o
 	@rm *.o
