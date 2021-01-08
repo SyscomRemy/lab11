@@ -18,10 +18,7 @@ echo $ARCH affiche arm
 echo $CROSS_COMPILE affiche arm-linux-gnueabi
 
 4)
-cd Desktop | echo $ARCH
-cd Desktop | echo $CROSS_COMPILE	
-
-affiche bien les variables
+arm +TAB affiche la suite de la commande de cross compilation donc on arrive à accéder
 
 5)
 modification du make file:
@@ -79,4 +76,4 @@ C'est bien le cross compiler qui est appelé.
 Il y a une erreur:
 bash: ./test.exe: cannot execute binary file: Exec format error
 
-Explication:
+Explication: Cette erreur est normale car nous essayons d'exécuter un binaire ARM sur notre machine qui comprends le binaire x86. Donc la machine ne comprends pas et affiche une erreur.
