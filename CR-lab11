@@ -7,7 +7,10 @@ sudo apt install gcc-arm-linux-gnueabi
 
 2)
 dpkg -L gcc-arm-linux-gnueabi
+
+/usr/bin/arm-linux-gnueabi-gcc
 L'exécutable est dans: /usr/bin et son nom est:arm-linux-gnueabi
+
 3)
 Il faut ouvrir le .bashrc et y ajouter 2 export pour chacunes des variables
 export ARCH=arm
@@ -18,12 +21,18 @@ echo $ARCH affiche arm
 echo $CROSS_COMPILE affiche arm-linux-gnueabi
 
 4)
+<<<<<<< HEAD
 arm +TAB affiche la suite de la commande de cross compilation donc on arrive à accéder
+=======
+cd Desktop	
+quand on tape arm- et qu'on fait tabulation la commande est bien retrouvée
+elle affiche la suite du com de la chaîne.
+>>>>>>> 9221e7de564d20b60a2c1371f1778e877c4c0123
 
 5)
 modification du make file:
 
-CC=${CROSS_COMPILE}gcc
+CC=gcc
 OBJ=max.o min.o variance.o
 
 ifeq (${DEBUG},yes)
@@ -38,18 +47,18 @@ mode : test.exe
         @echo "$(MODE)"
 
 max.o : max.c
-        ${CC} ${CC_OPTIONS} -c $^
+        ${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 min.o : min.c
-        ${CC} ${CC_OPTIONS} -c $^
+        ${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 variance.o : variance.c
-        ${CC} ${CC_OPTIONS} -c $^
+        ${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 test.o : test.c
-        ${CC} ${CC_OPTIONS} -c $^
+        ${CROSS_COMPILE}${CC} ${CC_OPTIONS} -c $^
 
 test.exe : test.o ${OBJ}
-        ${CC} ${CC_OPTIONS} -o $@ $< ${OBJ}
+        ${CROSS_COMPILE}${CC} ${CC_OPTIONS} -o $@ $< ${OBJ}
 
 clean: *.o
         @rm *.o
