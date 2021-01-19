@@ -21,13 +21,8 @@ echo $ARCH affiche arm
 echo $CROSS_COMPILE affiche arm-linux-gnueabi
 
 4)
-<<<<<<< HEAD
+
 arm +TAB affiche la suite de la commande de cross compilation donc on arrive à accéder
-=======
-cd Desktop	
-quand on tape arm- et qu'on fait tabulation la commande est bien retrouvée
-elle affiche la suite du com de la chaîne.
->>>>>>> 9221e7de564d20b60a2c1371f1778e877c4c0123
 
 5)
 modification du make file:
